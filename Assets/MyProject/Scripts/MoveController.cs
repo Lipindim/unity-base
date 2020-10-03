@@ -10,9 +10,10 @@ public class MoveController : MonoBehaviour
     private void Update()
     {
         float vectorX = Input.GetAxis("Horizontal");
-        float vectorZ = Input.GetAxis("Vertical");
+        float vectorZ = Input.GetAxisRaw("Vertical");
 
-        transform.position += transform.forward * vectorZ * _speed * Time.deltaTime;
+        GetComponent<Rigidbody>().AddForce(transform.forward * vectorZ * _speed);
+        //transform.position += transform.forward * vectorZ * _speed * Time.deltaTime;
         var rotateVector = new Vector3(0, vectorX * _turnSpeed * Time.deltaTime, 0);
         transform.Rotate(rotateVector);
 

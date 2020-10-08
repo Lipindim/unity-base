@@ -1,9 +1,19 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 
 public class HealthController : MonoBehaviour
 {
-    [SerializeField] private float _healthValue = 3;
+    public event Action<float> OnChangeHealth;
+    public float HealthValue
+    {
+        get
+        {
+            return _healthValue;
+        }
+    }
+
+    [SerializeField] private float _healthValue = 3.0f;
 
     private float _currentHealthValue;
 
@@ -15,6 +25,7 @@ public class HealthController : MonoBehaviour
     public void Hurt(float damage)
     {
         _currentHealthValue -= damage;
+        OnChangeHealth?.Invoke(_currentHealthValue);
         if (_currentHealthValue <= 0)
         {
             KillsCounter.Instanse.AddKill(gameObject);

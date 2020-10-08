@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Cinemachine;
+using UnityEngine;
 
 
 public class BulletController : MonoBehaviour
@@ -12,15 +13,17 @@ public class BulletController : MonoBehaviour
     {
         _player = GameObject.FindGameObjectWithTag("Player");
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Player"))
         {
-            var enemy = other.GetComponent<HealthController>();
+            
+            var enemy = collision.gameObject.GetComponent<HealthController>();
             enemy.Hurt(_damage);
             Destroy(gameObject);
             if (_hitSound != null && _player != null)
                 _player.GetComponent<AudioSource>().PlayOneShot(_hitSound);
         }
     }
+
 }

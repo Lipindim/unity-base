@@ -5,7 +5,6 @@ using UnityEngine;
 public class TurretController : MonoBehaviour
 {
     [SerializeField] private float _attackRange = 2;
-    [SerializeField] private float _attackSpeed = 1;
 
     private GameObject _player;
     private ShotController _shotController;

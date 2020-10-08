@@ -294,6 +294,7 @@ GameObject:
   - component: {fileID: 8068509406918245723}
   - component: {fileID: 8731411837767980520}
   - component: {fileID: 8805404747315299881}
+  - component: {fileID: 6977066110138656703}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -377,6 +378,7 @@ MonoBehaviour:
   _mask:
     serializedVersion: 2
     m_Bits: 1
+  _patrolPoints: []
   _visionRange: 5
   _visionAngle: 90
   _attackRange: 2
@@ -398,6 +400,28 @@ MonoBehaviour:
   _spawnPoint: {fileID: 2037034076497597247}
   _reloadTime: 2
   _shotPower: 200
+--- !u!195 &6977066110138656703
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7613229887075087196}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.2
+  m_Speed: 2
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &7641250789256660202
 GameObject:
   m_ObjectHideFlags: 0

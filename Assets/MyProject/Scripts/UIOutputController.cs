@@ -1,29 +1,39 @@
-﻿using TMPro;
+﻿using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class UIOutputController : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _healthTextMesh;
     [SerializeField] private TextMeshProUGUI _killEnemyCountTextMesh;
+    [SerializeField] private TextMeshProUGUI _inventoryTextMesh;
     [SerializeField] private KillsCounter _killCounter;
+
 
     private void Start()
     {
         HealthController healthController = GetComponent<HealthController>();
-        OutputHealth(healthController.HealthValue);
-        healthController.OnChangeHealth += OutputHealth;
+        DisplayHealth(healthController.HealthValue);
+        healthController.OnChangeHealth += DisplayHealth;
 
-        OutputKillEnemyCount(_killCounter.CurrentKillCount);
-        _killCounter.OnChangeKillCount += OutputKillEnemyCount;
+        DisplayKillEnemyCount(_killCounter.CurrentKillCount);
+        _killCounter.OnChangeKillCount += DisplayKillEnemyCount;
     }
 
-    private void OutputHealth(float health)
+    private void DisplayHealth(float health)
     {
         _healthTextMesh.text = $"Жизней: {health}";
     }
 
-    private void OutputKillEnemyCount(int killEnemyCount)
+    private void DisplayKillEnemyCount(int killEnemyCount)
     {
         _killEnemyCountTextMesh.text = $"Убито: {killEnemyCount}";
+    }
+
+    public void DisplayInventory(IEnumerable<Item> items)
+    {
+        string itemsString = string.Join("\n", items.Select(x => x.ItemName));
+        _inventoryTextMesh.text = $"Инвентарь:\n{itemsString}";
     }
 }

@@ -9,23 +9,60 @@ public class MoveController : MonoBehaviour
     [SerializeField] private float _turnSpeed = 180;
 
     private Rigidbody _rigidbody;
+    private Animator _animator;
+
+    private bool _isWalk;
 
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
-        float vectorX = Input.GetAxisRaw("Horizontal");
-        float vectorZ = Input.GetAxisRaw("Vertical");
+        Move();
+        Rotation();
+        Jump();
+        ChangeAnimation();
+    }
 
-        if (_rigidbody.velocity.sqrMagnitude < _speed * _speed)
-            _rigidbody.AddForce(transform.forward * vectorZ * _speed, ForceMode.Impulse);
-        var rotateVector = new Vector3(0, vectorX * _turnSpeed * Time.deltaTime, 0);
-        transform.Rotate(rotateVector);
-
+    private void Jump()
+    {
         if (Input.GetKeyDown(KeyCode.Space))
             _rigidbody.AddForce((gameObject.transform.up) * _jumpPower);
+    }
+
+    private void Rotation()
+    {
+        if (IsCharacterMoving())
+            transform.rotation = Quaternion.LookRotation(_rigidbody.velocity);
+    }
+
+    private void Move()
+    {
+        float z = Input.GetAxisRaw("Horizontal");
+        float x = Input.GetAxisRaw("Vertical");
+
+        _rigidbody.velocity = (new Vector3(-x, transform.position.y, z)) * _speed;
+    }
+
+    private void ChangeAnimation()
+    {
+        if (IsCharacterMoving() && !_isWalk)
+        {
+            _isWalk = true;
+            _animator.SetTrigger("Walk");
+        }
+        else if (!IsCharacterMoving() && _isWalk)
+        {
+            _isWalk = false;
+            _animator.ResetTrigger("Walk");
+        }
+    }
+
+    private bool IsCharacterMoving()
+    {
+        return _rigidbody.velocity.sqrMagnitude != 0;
     }
 }

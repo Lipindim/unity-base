@@ -3,16 +3,19 @@
 
 public class MyGameEnding : MonoBehaviour
 {
-    [SerializeField] public float _fadeDuration = 5f;
-    [SerializeField] public AudioSource _exitAudio;
+    [SerializeField] private AudioSource _exitAudio;
+    [SerializeField] private HealthController _bossHealthController;
+    [SerializeField] private HealthController _playerHealthController;
+
+    [SerializeField] private float _fadeDuration = 5.0f;
 
     private bool _isGameEnd;
     private float _timer;
     private bool _hasAudioPlayed;
 
-    public void EndGame()
+    private void Start()
     {
-        _isGameEnd = true;
+        _bossHealthController.OnDie += EndGame;
     }
 
     private void Update()
@@ -22,6 +25,12 @@ public class MyGameEnding : MonoBehaviour
             EndLevel(_exitAudio);
         }
     }
+    public void EndGame()
+    {
+        _isGameEnd = true;
+    }
+
+    
 
     private void EndLevel(AudioSource audioSource)
     {

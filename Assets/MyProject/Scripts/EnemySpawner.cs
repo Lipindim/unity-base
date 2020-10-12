@@ -6,10 +6,10 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private GameObject _enemy;
     [SerializeField] private Transform _spawnPoint;
+
     [SerializeField] private uint _enemyCount = 5;
     [SerializeField] private float _spawnIntervalSec = 1;
 
-    private Timer _timer;
     private int _enemySpawned = 0;
 
     private void Start()

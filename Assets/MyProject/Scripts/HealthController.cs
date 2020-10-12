@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class HealthController : MonoBehaviour
 {
-    public event Action<float> OnChangeHealth;
     public float HealthValue
     {
         get
@@ -12,6 +11,9 @@ public class HealthController : MonoBehaviour
             return _healthValue;
         }
     }
+
+    public event Action<float> OnChangeHealth;
+    public event Action OnDie;
 
     [SerializeField] private float _healthValue = 3.0f;
 
@@ -29,6 +31,7 @@ public class HealthController : MonoBehaviour
         if (_currentHealthValue <= 0)
         {
             KillsCounter.Instanse.AddKill(gameObject);
+            OnDie?.Invoke();
             Destroy(gameObject);
         }
     }

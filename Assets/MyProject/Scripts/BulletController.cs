@@ -1,11 +1,10 @@
-﻿using Cinemachine;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 public class BulletController : MonoBehaviour
 {
-    [SerializeField] private int _damage = 1;
     [SerializeField] private AudioClip _hitSound;
+    [SerializeField] private int _damage = 1;
 
     private GameObject _player;
 
@@ -13,13 +12,14 @@ public class BulletController : MonoBehaviour
     {
         _player = GameObject.FindGameObjectWithTag("Player");
     }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Player"))
         {
             
-            var enemy = collision.gameObject.GetComponent<HealthController>();
-            enemy.Hurt(_damage);
+            var healthController = collision.gameObject.GetComponent<HealthController>();
+            healthController.Hurt(_damage);
             Destroy(gameObject);
             if (_hitSound != null && _player != null)
                 _player.GetComponent<AudioSource>().PlayOneShot(_hitSound);

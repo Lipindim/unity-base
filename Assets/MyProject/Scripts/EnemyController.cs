@@ -8,8 +8,11 @@ public class EnemyController : MonoBehaviour
 {
     private const float DISTANSE_ERROR = 0.05f;
 
-    [SerializeField] private LayerMask _mask;
+    #region Fields
+
     [SerializeField] private Transform[] _patrolPoints;
+
+    [SerializeField] private LayerMask _mask;
     [SerializeField] private float _visionRange = 5.0f;
     [SerializeField] private float _visionAngle = 30.0f;
     [SerializeField] private float _attackRange = 2.0f;
@@ -18,10 +21,16 @@ public class EnemyController : MonoBehaviour
     private GameObject _player;
     private ShotController _shotController;
     private NavMeshAgent _navMeshAgent;
+
     private Vector3 _targetPosition;
     private float _squarVisionRange;
     private float _squarAttackRange;
     private int _currentPatrolPoint;
+
+    #endregion
+
+
+    #region Fields
 
     private Vector3 CurrentPatrolPosition
     {
@@ -30,6 +39,11 @@ public class EnemyController : MonoBehaviour
             return _patrolPoints[_currentPatrolPoint].position;
         }
     }
+
+    #endregion
+
+
+    #region UnityMethods
 
     private void Start()
     {
@@ -46,6 +60,11 @@ public class EnemyController : MonoBehaviour
     {
         EnemyAction();
     }
+
+    #endregion
+
+
+    #region Methods
 
     private void EnemyAction()
     {
@@ -89,6 +108,9 @@ public class EnemyController : MonoBehaviour
 
     private void Patrol()
     {
+        if (_patrolPoints == null || _patrolPoints.Length == 0)
+            return;
+
         if (Mathf.Abs(transform.position.sqrMagnitude - CurrentPatrolPosition.sqrMagnitude) < DISTANSE_ERROR)
             _currentPatrolPoint = (_currentPatrolPoint + 1) % _patrolPoints.Length;
 
@@ -116,4 +138,6 @@ public class EnemyController : MonoBehaviour
 
         return true;
     }
+
+    #endregion
 }

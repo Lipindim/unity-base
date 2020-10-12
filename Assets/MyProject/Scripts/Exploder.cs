@@ -4,12 +4,20 @@ using UnityEngine;
 
 public class Exploder : MonoBehaviour
 {
+    #region Fields
+
     [SerializeField] private AudioClip _exploseSound;
+
     [SerializeField] private float _explosePower = 3000;
     [SerializeField] private float _exploseDamage = 3;
     [SerializeField] private float _exploseRadius = 5;
 
     private GameObject _player;
+
+    #endregion
+
+
+    #region UnityMethods
 
     private void Start()
     {
@@ -30,6 +38,10 @@ public class Exploder : MonoBehaviour
         }
     }
 
+    #endregion
+
+
+    #region Methods
 
     private void ContactWithMine(GameObject contactingObject)
     {
@@ -48,4 +60,6 @@ public class Exploder : MonoBehaviour
         if (_exploseSound != null && _player != null)
             _player.GetComponent<AudioSource>().PlayOneShot(_exploseSound);
     }
+
+    #endregion
 }

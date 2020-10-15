@@ -1,9 +1,9 @@
-﻿using System.IO;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 public class Exploder : MonoBehaviour
 {
+
     #region Fields
 
     [SerializeField] private AudioClip _exploseSound;
@@ -15,7 +15,6 @@ public class Exploder : MonoBehaviour
     private GameObject _player;
 
     #endregion
-
 
     #region UnityMethods
 
@@ -40,7 +39,6 @@ public class Exploder : MonoBehaviour
 
     #endregion
 
-
     #region Methods
 
     private void ContactWithMine(GameObject contactingObject)
@@ -62,4 +60,5 @@ public class Exploder : MonoBehaviour
     }
 
     #endregion
+
 }

@@ -1,29 +1,23 @@
 ﻿using UnityEngine;
 
 
-public class ObjectDeactivator : MonoBehaviour
+public class OpenDoorController : MonoBehaviour
 {
+
+    #region Fields
+
     [SerializeField] private GameObject _toggledGameObject;
+
+    #endregion
+
+    #region UnityMethods
 
     private void OnTriggerEnter(Collider other)
     {
-        //_toggledGameObject.SetActive(false);
-        print($"На меня наступил {other.gameObject.name}");
         var animator =_toggledGameObject.GetComponent<Animator>();
         animator.SetTrigger("Open");
     }
 
-    //private void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.Backspace))
-    //    {
-    //        var animator = _toggledGameObject.GetComponent<Animator>();
-    //        animator.SetTrigger("Open");
-    //    }
-    //}
+    #endregion
 
-    private void OnTriggerExit(Collider other)
-    {
-        //_toggledGameObject.SetActive(true);
-    }
 }

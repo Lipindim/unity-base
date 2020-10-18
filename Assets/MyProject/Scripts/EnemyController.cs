@@ -1,12 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
+
 
 public class EnemyController : MonoBehaviour
 {
+
+    #region Constants
+
     private const float DISTANSE_ERROR = 0.05f;
+
+    #endregion
 
     #region Fields
 
@@ -29,8 +32,7 @@ public class EnemyController : MonoBehaviour
 
     #endregion
 
-
-    #region Fields
+    #region Properties
 
     private Vector3 CurrentPatrolPosition
     {
@@ -41,7 +43,6 @@ public class EnemyController : MonoBehaviour
     }
 
     #endregion
-
 
     #region UnityMethods
 
@@ -62,7 +63,6 @@ public class EnemyController : MonoBehaviour
     }
 
     #endregion
-
 
     #region Methods
 

@@ -3,9 +3,13 @@
 
 public class MyGameEnding : MonoBehaviour
 {
+
+    #region Fields
+
     [SerializeField] private AudioSource _exitAudio;
     [SerializeField] private HealthController _bossHealthController;
     [SerializeField] private HealthController _playerHealthController;
+    [SerializeField] private UIOutputController _uiOutputController;
 
     [SerializeField] private float _fadeDuration = 5.0f;
 
@@ -13,9 +17,22 @@ public class MyGameEnding : MonoBehaviour
     private float _timer;
     private bool _hasAudioPlayed;
 
+    #endregion
+
+    #region UnityMethods
+
     private void Start()
     {
         _bossHealthController.OnDie += EndGame;
+        _playerHealthController.OnDie += _playerHealthController_OnDie;
+    }
+
+    private void _playerHealthController_OnDie()
+    {
+        _uiOutputController.DisplayCheckPointMessage("Вы проиграли!!!", _fadeDuration);
+        _uiOutputController.ShowRestartRound();
+        Time.timeScale = 0;
+        
     }
 
     private void Update()
@@ -25,18 +42,23 @@ public class MyGameEnding : MonoBehaviour
             EndLevel(_exitAudio);
         }
     }
+
+    #endregion
+
+    #region Methods
+
     public void EndGame()
     {
         _isGameEnd = true;
     }
-
-    
 
     private void EndLevel(AudioSource audioSource)
     {
         if (!_hasAudioPlayed)
         {
             audioSource.Play();
+            _uiOutputController.DisplayCheckPointMessage("Вы победили!!!", _fadeDuration);
+            _uiOutputController.DisplayVictoryImage();
             _hasAudioPlayed = true;
         }
 
@@ -45,4 +67,7 @@ public class MyGameEnding : MonoBehaviour
         if (_timer > _fadeDuration)
             Application.Quit();
     }
+
+    #endregion
+
 }

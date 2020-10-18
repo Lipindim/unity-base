@@ -3,8 +3,15 @@
 
 public class KeyboardController : MonoBehaviour
 {
+
+    #region Fields
+
     private ObjectSpawner _mineSpawner;
     private ItemCollector _itemCollector;
+
+    #endregion
+
+    #region UnityMethods
 
     private void Start()
     {
@@ -17,6 +24,10 @@ public class KeyboardController : MonoBehaviour
         SpawnMine();
     }
 
+    #endregion
+
+    #region Methods
+
     private void SpawnMine()
     {
         if (Input.GetKeyDown(KeyCode.Mouse1) && _itemCollector.HaveWeapon())
@@ -24,4 +35,7 @@ public class KeyboardController : MonoBehaviour
             _mineSpawner.Spawn();
         }
     }
+
+    #endregion
+
 }

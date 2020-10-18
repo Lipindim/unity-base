@@ -3,10 +3,18 @@
 
 public class BulletController : MonoBehaviour
 {
+
+    #region Fields
+
     [SerializeField] private AudioClip _hitSound;
+
     [SerializeField] private int _damage = 1;
 
     private GameObject _player;
+
+    #endregion
+
+    #region UnityMethods
 
     private void Start()
     {
@@ -25,5 +33,7 @@ public class BulletController : MonoBehaviour
                 _player.GetComponent<AudioSource>().PlayOneShot(_hitSound);
         }
     }
+
+    #endregion
 
 }

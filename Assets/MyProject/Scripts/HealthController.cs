@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class HealthController : MonoBehaviour
 {
+
+    #region Properties
+
     public float HealthValue
     {
         get
@@ -12,17 +15,33 @@ public class HealthController : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Events
+
     public event Action<float> OnChangeHealth;
     public event Action OnDie;
+
+    #endregion
+
+    #region Fields
 
     [SerializeField] private float _healthValue = 3.0f;
 
     private float _currentHealthValue;
 
-    void Start()
+    #endregion
+
+    #region UnityMethods
+
+    private void Start()
     {
         _currentHealthValue = _healthValue;
     }
+
+    #endregion
+
+    #region Methods
 
     public void Hurt(float damage)
     {
@@ -30,9 +49,12 @@ public class HealthController : MonoBehaviour
         OnChangeHealth?.Invoke(_currentHealthValue);
         if (_currentHealthValue <= 0)
         {
-            KillsCounter.Instanse.AddKill(gameObject);
             OnDie?.Invoke();
-            Destroy(gameObject);
+            if (!gameObject.CompareTag("Player"))
+                Destroy(gameObject);
         }
     }
+
+    #endregion Methods
+
 }

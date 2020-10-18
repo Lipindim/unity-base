@@ -2,15 +2,21 @@
 using System.Linq;
 using UnityEngine;
 
+
 public class ItemCollector : MonoBehaviour
 {
+
     #region Fields
 
+    [SerializeField] private string _collectWeaponMessage;
+
+    [SerializeField] private float _messageDisplayTime = 5.0f;
     [SerializeField] private float _collectItemRadius = 3.0f;
 
     private GameObject[] _items;
     private UIOutputController _uiOutputController;
     private List<Item> _collectedItems;
+
     private float _squareCollectedRadius;
 
     #endregion
@@ -54,13 +60,15 @@ public class ItemCollector : MonoBehaviour
     private void PickUpItems()
     {
         foreach (var gameObject in _items)
-        {
+        { 
             if (gameObject.activeSelf && InCollectaeRange(gameObject))
             {
                 Item item = gameObject.GetComponent<Item>();
                 _collectedItems.Add(item);
                 gameObject.SetActive(false);
                 _uiOutputController.DisplayInventory(_collectedItems);
+                if (item.ItemType == ItemTypes.Weapon)
+                    _uiOutputController.DisplayCheckPointMessage(_collectWeaponMessage, _messageDisplayTime);
             }
         }
     }
@@ -77,4 +85,5 @@ public class ItemCollector : MonoBehaviour
     }
 
     #endregion
+
 }

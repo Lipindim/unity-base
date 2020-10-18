@@ -3,12 +3,20 @@
 
 public class ShotController : MonoBehaviour
 {
+
+    #region Fields
+
     [SerializeField] private GameObject _spawnObject;
     [SerializeField] private Transform _spawnPoint;
-    [SerializeField] private float _reloadTime = 1;
-    [SerializeField] private float _shotPower = 50;
+
+    [SerializeField] private float _reloadTime = 1.0f;
+    [SerializeField] private float _shotPower = 50.0f;
 
     private bool _isReload;
+
+    #endregion
+
+    #region Methods
 
     public void Shot()
     {
@@ -36,4 +44,7 @@ public class ShotController : MonoBehaviour
     {
         _isReload = false;
     }
+
+    #endregion
+
 }

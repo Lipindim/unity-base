@@ -124,8 +124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51b8c1367dc95c74ab7867442ef30433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hitSound: {fileID: 8300000, guid: 07cbbd379a9b40840a6277b97c13b743, type: 3}
   _damage: 1
-  _hitSound: {fileID: 8300000, guid: 0a28e29b5a1cbb74591fadd282d8dd80, type: 3}
 --- !u!114 &-972226999292190786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,4 +138,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f17b19b77a9102f469cfa1276fb4c58f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _liveTimeSec: 3
+  _liveTimeSec: 1

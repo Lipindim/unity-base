@@ -1,17 +1,21 @@
-﻿using TMPro.EditorUtilities;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 public class MoveController : MonoBehaviour
 {
-    [SerializeField] private float _speed = 5;
-    [SerializeField] private float _jumpPower = 2000000;
-    [SerializeField] private float _turnSpeed = 180;
+
+    #region Fields
+
+    [SerializeField] private float _speed = 5.0f;
 
     private Rigidbody _rigidbody;
     private Animator _animator;
 
     private bool _isWalk;
+
+    #endregion
+
+    #region UnityMethods
 
     private void Start()
     {
@@ -23,15 +27,12 @@ public class MoveController : MonoBehaviour
     {
         Move();
         Rotation();
-        Jump();
         ChangeAnimation();
     }
 
-    private void Jump()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-            _rigidbody.AddForce((gameObject.transform.up) * _jumpPower);
-    }
+    #endregion
+
+    #region Methods
 
     private void Rotation()
     {
@@ -65,4 +66,7 @@ public class MoveController : MonoBehaviour
     {
         return _rigidbody.velocity.sqrMagnitude != 0;
     }
+
+    #endregion
+
 }

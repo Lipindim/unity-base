@@ -8,8 +8,10 @@ public class KeyboardController : MonoBehaviour
 
     private ObjectSpawner _mineSpawner;
     private ItemCollector _itemCollector;
+    private ItemActivator _itemActivator;
 
     #endregion
+
 
     #region UnityMethods
 
@@ -17,14 +19,17 @@ public class KeyboardController : MonoBehaviour
     {
         _mineSpawner = GetComponent<ObjectSpawner>();
         _itemCollector = GetComponent<ItemCollector>();
+        _itemActivator = GetComponent<ItemActivator>();
     }
 
     private void Update()
     {
         SpawnMine();
+        ActivateItem();
     }
 
     #endregion
+
 
     #region Methods
 
@@ -34,6 +39,12 @@ public class KeyboardController : MonoBehaviour
         {
             _mineSpawner.Spawn();
         }
+    }
+
+    private void ActivateItem()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+            _itemActivator.ActivateNearObject();
     }
 
     #endregion

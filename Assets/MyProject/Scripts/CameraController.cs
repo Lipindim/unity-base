@@ -13,6 +13,7 @@ public class CameraController : MonoBehaviour
 
     #endregion
 
+
     #region UnityMethods
 
     private void Start()
@@ -27,6 +28,7 @@ public class CameraController : MonoBehaviour
     }
 
     #endregion
+
 
     #region Methods
 

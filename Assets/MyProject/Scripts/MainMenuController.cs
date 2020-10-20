@@ -2,7 +2,6 @@
 using UnityEngine.SceneManagement;
 
 
-
 public class MainMenuController : MonoBehaviour
 {
 
@@ -11,6 +10,12 @@ public class MainMenuController : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene(1);
+        Time.timeScale = 1;
+    }
+
+    public void LoadSecondLevel()
+    {
+        SceneManager.LoadScene(2);
         Time.timeScale = 1;
     }
 

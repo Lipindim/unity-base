@@ -6,9 +6,10 @@ public class AutoDestroyer : MonoBehaviour
 
     #region Fields
 
-    [SerializeField] private int _liveTimeSec = 5;
+    [SerializeField] private float _liveTimeSec = 5.0f;
 
     #endregion
+
 
     #region UnityMethods
 

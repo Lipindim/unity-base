@@ -7,14 +7,18 @@ public class Exploder : MonoBehaviour
     #region Fields
 
     [SerializeField] private AudioClip _exploseSound;
+    [SerializeField] private ParticleSystem _exploderPartialSystem;
 
-    [SerializeField] private float _explosePower = 3000;
-    [SerializeField] private float _exploseDamage = 3;
-    [SerializeField] private float _exploseRadius = 5;
+    [SerializeField] private float _explosePower = 3000.0f;
+    [SerializeField] private float _exploseDamage = 2.0f;
+    [SerializeField] private float _exploseRadius = 5.0f;
 
     private GameObject _player;
 
+    private bool _expleded;
+
     #endregion
+
 
     #region UnityMethods
 
@@ -22,22 +26,30 @@ public class Exploder : MonoBehaviour
     {
         _player = GameObject.FindGameObjectWithTag("Player");
     }
+
+    private void Update()
+    {
+        if (_expleded && !_exploderPartialSystem.isPlaying)
+            Destroy(gameObject);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Player"))
         {
+            _expleded = true;
+            _exploderPartialSystem.Play();
             PlayExploseSound();
 
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
             foreach (var enemy in enemies)
                 ContactWithMine(enemy);
             ContactWithMine(_player);
-            Destroy(gameObject);
-
         }
     }
 
     #endregion
+
 
     #region Methods
 

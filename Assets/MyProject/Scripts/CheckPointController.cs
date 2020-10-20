@@ -15,6 +15,7 @@ public class CheckPointController : MonoBehaviour
 
     #endregion
 
+
     #region UnityMethods
 
     private void OnTriggerEnter(Collider other)

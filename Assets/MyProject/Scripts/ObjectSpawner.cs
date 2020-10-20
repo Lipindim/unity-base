@@ -12,6 +12,7 @@ public class ObjectSpawner : MonoBehaviour
 
     #endregion
 
+
     #region Methods
 
     public GameObject Spawn()

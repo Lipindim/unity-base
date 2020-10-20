@@ -21,6 +21,20 @@ public class ItemCollector : MonoBehaviour
 
     #endregion
 
+
+    #region Properties
+
+    public IEnumerable<Item> CollectedItems
+    {
+        get
+        {
+            return _collectedItems;
+        }
+    }
+
+    #endregion
+
+
     #region UnityMethods
 
     private void Start()
@@ -34,28 +48,12 @@ public class ItemCollector : MonoBehaviour
     private void Update()
     {
         PickUpItems();
-        UseKeys();
     }
 
     #endregion
 
-    #region Methods
 
-    private void UseKeys()
-    {
-        foreach (var item in _collectedItems)
-        {
-            if (item.ItemType == ItemTypes.Key)
-            {
-                var vectorFromPlayerToDoor = item.RelatedObject.transform.position - transform.position;
-                if (vectorFromPlayerToDoor.sqrMagnitude < _squareCollectedRadius)
-                {
-                    Animator doorAnimator = item.RelatedObject.GetComponent<Animator>();
-                    doorAnimator.SetTrigger("Open");
-                }
-            }
-        }
-    }
+    #region Methods
 
     private void PickUpItems()
     {

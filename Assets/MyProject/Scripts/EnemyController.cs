@@ -8,8 +8,10 @@ public class EnemyController : MonoBehaviour
     #region Constants
 
     private const float DISTANSE_ERROR = 0.05f;
+    private const float PLAYER_Y_SHOOT_OFFSET = 0.5f;
 
     #endregion
+
 
     #region Fields
 
@@ -32,6 +34,7 @@ public class EnemyController : MonoBehaviour
 
     #endregion
 
+
     #region Properties
 
     private Vector3 CurrentPatrolPosition
@@ -43,6 +46,7 @@ public class EnemyController : MonoBehaviour
     }
 
     #endregion
+
 
     #region UnityMethods
 
@@ -64,6 +68,7 @@ public class EnemyController : MonoBehaviour
 
     #endregion
 
+
     #region Methods
 
     private void EnemyAction()
@@ -71,12 +76,12 @@ public class EnemyController : MonoBehaviour
         Vector3 directionToPlayer = _player.transform.position - transform.position;
         float squarDistanceToPlayer = directionToPlayer.sqrMagnitude;
 
-        if (IsPlayerInVision(directionToPlayer, squarDistanceToPlayer))
+        if (IsPlayerInVision(directionToPlayer))
         {
             LookAtPlayer();
 
             if (squarDistanceToPlayer < _squarAttackRange)
-                Shot(directionToPlayer);
+                Shot(_player.transform.position);
             else
                 GoToPlayer();
         }
@@ -86,10 +91,10 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private void Shot(Vector3 directionToPlayer)
+    private void Shot(Vector3 plyerPoint)
     {
-        Vector3 directionToShot = new Vector3(directionToPlayer.x, directionToPlayer.y - 0.5f, directionToPlayer.z);
-        _shotController.Shot(directionToShot);
+        Vector3 directionToShot = new Vector3(plyerPoint.x, plyerPoint.y + PLAYER_Y_SHOOT_OFFSET, plyerPoint.z);
+        _shotController.ShotToPint(directionToShot);
     }
 
     private void GoToPlayer()
@@ -111,25 +116,29 @@ public class EnemyController : MonoBehaviour
         if (_patrolPoints == null || _patrolPoints.Length == 0)
             return;
 
-        if (Mathf.Abs(transform.position.sqrMagnitude - CurrentPatrolPosition.sqrMagnitude) < DISTANSE_ERROR)
+        if ((transform.position - _targetPosition).sqrMagnitude < DISTANSE_ERROR)
+        {
             _currentPatrolPoint = (_currentPatrolPoint + 1) % _patrolPoints.Length;
+        }
+            
 
-        if (Mathf.Abs(_targetPosition.sqrMagnitude - CurrentPatrolPosition.sqrMagnitude) > DISTANSE_ERROR)
+        if ((_targetPosition - CurrentPatrolPosition).sqrMagnitude > DISTANSE_ERROR)
         {
             _navMeshAgent.SetDestination(CurrentPatrolPosition);
             _targetPosition = CurrentPatrolPosition;
         }
     }
 
-    private bool IsPlayerInVision(Vector3 directionToPlayer, float squarDistanceToPlayer)
+    private bool IsPlayerInVision(Vector3 directionToPlayer)
     {
-        if (_squarVisionRange < squarDistanceToPlayer)
+        if (GameSettings.IsDark)
             return false;
+
         if (_visionAngle < Vector3.Angle(directionToPlayer, transform.forward))
             return false;
 
         RaycastHit hit;
-        var rayCast = Physics.Raycast(transform.position, directionToPlayer, out hit, Mathf.Infinity,
+        var rayCast = Physics.Raycast(transform.position, directionToPlayer, out hit, _visionRange,
         _mask);
         if (!rayCast)
             return false;

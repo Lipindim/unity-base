@@ -14,6 +14,7 @@ public class BulletController : MonoBehaviour
 
     #endregion
 
+
     #region UnityMethods
 
     private void Start()
@@ -25,7 +26,6 @@ public class BulletController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Player"))
         {
-            
             var healthController = collision.gameObject.GetComponent<HealthController>();
             healthController.Hurt(_damage);
             Destroy(gameObject);

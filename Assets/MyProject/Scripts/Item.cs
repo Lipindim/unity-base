@@ -5,14 +5,6 @@ public class Item : MonoBehaviour
 
     #region Properties
 
-    public GameObject RelatedObject
-    {
-        get
-        {
-            return _relatedObject;
-        }
-    }
-
     public string ItemName
     {
         get
@@ -31,9 +23,8 @@ public class Item : MonoBehaviour
 
     #endregion
 
-    #region Fields
 
-    [SerializeField] private GameObject _relatedObject;
+    #region Fields
 
     [SerializeField] private string _itemName;
     [SerializeField] private ItemTypes _itemType;

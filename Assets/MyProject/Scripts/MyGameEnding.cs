@@ -19,15 +19,18 @@ public class MyGameEnding : MonoBehaviour
 
     #endregion
 
+
     #region UnityMethods
 
     private void Start()
     {
-        _bossHealthController.OnDie += EndGame;
-        _playerHealthController.OnDie += _playerHealthController_OnDie;
+        if (_bossHealthController != null)
+            _bossHealthController.OnDie += EndGame;
+
+        _playerHealthController.OnDie += OnPlayerDie;
     }
 
-    private void _playerHealthController_OnDie()
+    private void OnPlayerDie()
     {
         _uiOutputController.DisplayCheckPointMessage("Вы проиграли!!!", _fadeDuration);
         _uiOutputController.ShowRestartRound();
@@ -44,6 +47,7 @@ public class MyGameEnding : MonoBehaviour
     }
 
     #endregion
+
 
     #region Methods
 

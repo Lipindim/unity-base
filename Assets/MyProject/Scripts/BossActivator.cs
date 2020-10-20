@@ -17,6 +17,7 @@ public class BossActivator : MonoBehaviour
 
     #endregion
 
+
     #region UnityMethods
 
     private void OnTriggerEnter(Collider other)
@@ -25,7 +26,7 @@ public class BossActivator : MonoBehaviour
         {
             _uiOutputController.DisplayCheckPointMessage(_message, _messageDisplayTime);
             _boss.SetActive(true);
-            _bossDoorAnimator.SetTrigger("Close");
+            _bossDoorAnimator.ResetTrigger("Open");
             _isActivated = true;
         }
     }

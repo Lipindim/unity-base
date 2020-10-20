@@ -15,6 +15,7 @@ public class MoveController : MonoBehaviour
 
     #endregion
 
+
     #region UnityMethods
 
     private void Start()
@@ -31,6 +32,7 @@ public class MoveController : MonoBehaviour
     }
 
     #endregion
+
 
     #region Methods
 

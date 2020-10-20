@@ -21,6 +21,7 @@ public class UIOutputController : MonoBehaviour
 
     #endregion
 
+
     #region UnityMethods
 
     private void Start()
@@ -32,6 +33,7 @@ public class UIOutputController : MonoBehaviour
     }
 
     #endregion
+
 
     #region Methods
 

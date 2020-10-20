@@ -17,12 +17,14 @@ public class HealthController : MonoBehaviour
 
     #endregion
 
+
     #region Events
 
     public event Action<float> OnChangeHealth;
     public event Action OnDie;
 
     #endregion
+
 
     #region Fields
 
@@ -32,6 +34,7 @@ public class HealthController : MonoBehaviour
 
     #endregion
 
+
     #region UnityMethods
 
     private void Start()
@@ -40,6 +43,7 @@ public class HealthController : MonoBehaviour
     }
 
     #endregion
+
 
     #region Methods
 
